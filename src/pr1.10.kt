@@ -1,3 +1,4 @@
+// Define Car class
 class Car(
     var type: String,
     var model: Int,
@@ -8,35 +9,40 @@ class Car(
     init {
         println("Object of class is created and Init is called.")
     }
-    fun getCarInfo(): String {
-        return "Car Information: $type, $model\nCar Owner: $owner\nMiles Drive: $milesDriven"
-    }
-    fun getOriginalCarPrice(): Double {
+
+    fun getOriginalPrice(): Double {
         return price
     }
     fun getCurrentPrice(): Double {
-        return price - (milesDriven * 5)
+        val depreciation = milesDriven * 10   // ₹10 depreciation per mile
+        return (price - depreciation).coerceAtLeast(0.0) // Avoid negative
     }
     fun displayCarInfo() {
         println("----------")
-        println(getCarInfo())
-        println("Original Car Price: ${getOriginalCarPrice()}")
+        println("Car Information: $type, $model")
+        println("Car Owner: $owner")
+        println("Miles Drive: $milesDriven")
+        println("Original Car Price: ${getOriginalPrice()}")
         println("Current Car Price: ${getCurrentPrice()}")
         println("----------")
     }
 }
 fun main() {
-    println("Creating Car Class Object car1 in next line")
+    println("\nCreating Car Class Object car1 in next line")
     val car1 = Car("BMW", 2018, 100000.0, "Aman", 105)
     car1.displayCarInfo()
-    println("Creating Car Class Object car2 in next line")
+
+    println("\nCreating Car Class Object car2 in next line")
     val car2 = Car("BMW", 2019, 400000.0, "Karan", 20)
     car2.displayCarInfo()
-    println("******* ArrayList of Car **************")
-    val carList = ArrayList<Car>()
-    carList.add(Car("Toyota", 2017, 1080000.0, "KJS", 100))
-    carList.add(Car("Maruti", 2020, 4000000.0, "NPP", 200))
-    for (car in carList) {
+
+    println("\n******* ArrayList of Car ***************")
+    val cars = arrayListOf(
+        Car("Toyota", 2017, 1080000.0, "KJS", 100),
+        Car("Maruti", 2020, 4000000.0, "NPP", 200)
+    )
+
+    for (car in cars) {
         car.displayCarInfo()
     }
 }
